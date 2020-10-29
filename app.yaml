@@ -1,0 +1,15 @@
+runtime: python37
+service: py
+
+handlers:
+
+  - url: /(.+\.(gif|png|jpg|svg|css|csv|js|txt|pdf|pkl|pb|index|data-00000-of-00001))$
+    static_files: \1
+    require_matching_file: false
+    upload: .+\.(gif|png|jpg|svg|css|csv|py|js|txt|pdf|pkl|pb|index|data-00000-of-00001)$
+  - url: /my_modelCV
+    static_dir: my_modelCV
+  - url: .*
+    script: auto
+
+entrypoint: gunicorn -b :8080 --limit-request-line 0 main:app
