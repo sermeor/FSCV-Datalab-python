@@ -6,4 +6,3 @@ numpy==1.18.4
 flask_cors>=3.0.7
 gunicorn>=19.3.0
 lmfit==1.0.1
-tensorflow==2.2
