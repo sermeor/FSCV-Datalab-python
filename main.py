@@ -2,7 +2,7 @@
 from flask import Flask
 from flask import request, jsonify
 from sklearn.metrics import r2_score
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from scipy import signal
 import scipy
 from scipy.integrate import simps
@@ -22,10 +22,8 @@ cors = CORS(app, supports_credentials=True)
 
 
 app.config["DEBUG"] = True
-app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 @app.route('/deconvolution', methods=['GET'])
-@cross_origin()
 def deconvolution():
 
     if 'b' in request.args and 'Ts' in request.args and 'D' in request.args and 'signal' in request.args:
@@ -57,7 +55,7 @@ def deconvolution():
 
 
 @app.route('/peaks', methods=['GET'])
-@cross_origin()
+
 def peaks():
     if 'sign' in request.args and 'signal' in request.args and 'period' in request.args and 'ytype' in request.args:
         s=str(request.args['signal']).split(" ")
@@ -182,7 +180,7 @@ def peaks():
 
 
 @app.route('/gradient', methods=['GET'])
-@cross_origin()
+
 def gradient():
     if 'signal' in request.args and 'col1' in request.args and 'sign' in request.args and 'peak' in request.args:
         x=str(request.args['signal']).split(" ")
@@ -278,7 +276,7 @@ def gradient():
 
 
 @app.route('/cv', methods=['GET','POST'])
-@cross_origin()
+
 def cv():
     if request.is_json:
         json_data=request.get_json()
@@ -322,7 +320,7 @@ def cv():
     else:
         return "frequency is not there"
 @app.route('/cvClass', methods=['GET','POST'])
-@cross_origin()
+
 def cvClass():
     if request.is_json:
         json_data=request.get_json()
