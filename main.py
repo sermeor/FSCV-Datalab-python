@@ -337,12 +337,6 @@ def cvClass():
         sample = pd.DataFrame(scaler.transform(sample))
         sample.columns=columns
         result = pca.transform(sample)
-
-
-
         return " ".join(str(x) for x in result[0])
-
-
-
     else:
-        return "frequency is not there"
+        return "Fail"
